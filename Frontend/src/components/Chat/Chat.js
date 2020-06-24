@@ -9,27 +9,65 @@ export default function Play() {
   const [availableUsers, setAvailableUsers] = useState([]);
   const [userLogged, setUserLogged] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
-  // const [errorMessage, setErrorMessage] = useState(null);
+  const [messages, setMessages] = useState([]);
+  const [userJoinNotification, setUserJoinNotification] = useState("");
+  const [userTypeNotification, setUserTypeNotification] = useState("");
 
   useEffect(() => {
-    var url = "http://localhost:3030";
-    const temp = socket(url);
-    // temp.on("connectId", (res) => {
-    //   console.log(res);
-    // });
-    // temp.emit("message");
-    temp.on("allUsers", (res) => {
-      setAvailableUsers(res.allUsers);
-    });
-    // temp.on("message", (res) => {
-    //   console.log(res.message);
-    // });
-    setSocketConnection(temp);
-    return () => temp.disconnect();
+    try {
+      var url = "http://localhost:3030";
+      const temp = socket(url);
+      // temp.on("connectId", (res) => {
+      //   console.log(res);
+      // });
+      // temp.emit("message");
+      temp.on("allUsers", (res) => {
+        setAvailableUsers(res.allUsers);
+      });
+      temp.on("userUpdate", (res) => {
+        // console.log(res.username);
+        if (res !== null) {
+          setUserJoinNotification(res.username);
+        } else {
+          setUserJoinNotification(undefined);
+        }
+      });
+
+      temp.on("userTypeUpdate", (res) => {
+        if (res !== null) {
+          setUserTypeNotification(res.username);
+        } else {
+          setUserTypeNotification(undefined);
+        }
+      });
+
+      temp.on("newMessage", (res) => {
+        console.log(res);
+        let { message, username, timeOfMsg } = res.res;
+        let tempMessage = {
+          message,
+          username,
+          timeOfMsg,
+        };
+        setMessages((messages) => [...messages, tempMessage]);
+      });
+      setSocketConnection(temp);
+      return () => temp.disconnect();
+    } catch {
+      throw new Error("Server Not responding");
+    }
   }, []);
 
   const handleUserName = (e) => {
     setUsername(e.target.value);
+  };
+
+  const handleTyping = () => {
+    socketConnection.emit("userTyping", { username });
+  };
+
+  const handleStopTyping = () => {
+    socketConnection.emit("userTypingStop", { username });
   };
 
   const setUserName = () => {
@@ -47,28 +85,40 @@ export default function Play() {
     }
   };
 
+  const handleMessage = (usermessage) => {
+    let message = {
+      username,
+      message: usermessage,
+    };
+    socketConnection.emit("message", message);
+  };
+
   const handleLogout = () => {
     socketConnection.disconnect();
     window.location.reload();
   };
-  var messages = [
-    "Hi",
-    "Hello, How are you? , How are you?, How are you?,How are you?,How are you?",
-    "How are you?",
-    "Feeling Today",
-    "Good",
-    "BAD",
-  ];
+  // var messages = [
+  //   { message: "Hi", timeOfMsg: "2:01 pm" },
+  //   {
+  //     message:
+  //       "Hello,How are you? , How are you?, How are you?,How are you?,How are you?",
+  //     timeOfMsg: "2:01 pm",
+  //   },
+  //   { message: "How are you?", timeOfMsg: "2:01 pm" },
+  //   { message: "Feeling Today", timeOfMsg: "2:01 pm" },
+  //   { message: "Good", timeOfMsg: "2:01 pm" },
+  //   { message: "BAD", timeOfMsg: "2:01 pm" },
+  // ];
   return (
     <div>
       {userLogged === false && (
         <div className="username">
           <label htmlFor="name">
-            Name:&nbsp;
+            Username:&nbsp;
             <input
               type="text"
               id={"name"}
-              placeholder={"Enter your name..."}
+              placeholder={"Enter your username..."}
               value={username}
               onChange={handleUserName}
             />
@@ -90,19 +140,18 @@ export default function Play() {
               </button>
             </div>
           </div>
-          <ChatScreen users={availableUsers} messages={messages} />
+          <ChatScreen
+            users={availableUsers}
+            messages={messages}
+            handleMessage={handleMessage}
+            userJoinNotification={userJoinNotification}
+            handleTyping={handleTyping}
+            userTypeNotification={userTypeNotification}
+            handleStopTyping={handleStopTyping}
+          />
         </>
       )}
       <p className="error">{errorMessage}</p>
-      {/* <ul>
-        {userLogged &&
-          availableUsers.map((user) => {
-            if (username !== user.username) {
-              return <li key={user.id}>{user.username}</li>;
-            }
-            return null;
-          })}
-      </ul> */}
     </div>
   );
 }

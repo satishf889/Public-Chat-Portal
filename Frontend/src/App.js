@@ -1,12 +1,13 @@
 import React from "react";
 import "./App.css";
 import Chat from "./components/Chat/Chat";
-import Navbar from "./components/Navbar/Navbar";
-
+import Login from "./components/Login/Login";
+import Appbar from "./components/Appbar/Appbar";
 function App() {
   return (
     <div className="App">
-      <Navbar />
+      <Appbar />
+      {/* <Login /> */}
       <Chat />
     </div>
   );
