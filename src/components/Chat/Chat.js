@@ -15,7 +15,7 @@ export default function Play() {
 
   useEffect(() => {
     try {
-      var url = "http://localhost:3030";
+      var url = process.env.REACT_APP_SERVER_URL;
       const temp = socket(url);
       // temp.on("connectId", (res) => {
       //   console.log(res);
@@ -42,7 +42,6 @@ export default function Play() {
       });
 
       temp.on("newMessage", (res) => {
-        console.log(res);
         let { message, username, timeOfMsg } = res.res;
         let tempMessage = {
           message,

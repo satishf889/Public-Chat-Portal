@@ -3,7 +3,7 @@ import ChatInput from "./ChatInput";
 import ChatMessage from "./ChatMessage";
 import io from "socket.io-client";
 
-const URL = "http://localhost:3030";
+const URL = process.env.REACT_APP_SERVER_URL;
 
 class Chat extends Component {
   state = {

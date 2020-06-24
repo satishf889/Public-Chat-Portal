@@ -31,6 +31,9 @@ export default function MainChat({
   };
 
   const handleSend = () => {
+    if (message.length < 1) {
+      return;
+    }
     handleMessage(message);
     handleStopTyping();
     setMessage("");
@@ -63,7 +66,7 @@ export default function MainChat({
             rows="2"
             value={message}
             onChange={handleTextField}
-            color="white"
+            // color="white"
             style={{
               transition: "false",
             }}

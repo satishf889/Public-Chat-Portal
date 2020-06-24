@@ -39,7 +39,6 @@ export default function Login({ setUserLoggedIn }) {
       return;
     }
     let temp = { username: tempusername, password: temppassword };
-    console.log(tempusername, temppassword);
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     var requestOptions = {
@@ -54,7 +53,6 @@ export default function Login({ setUserLoggedIn }) {
         return res.json();
       })
       .then((res) => {
-        console.log(res);
         if (res.AUTH === true) {
           setUserError("");
           setUserLoggedIn(true);
@@ -68,7 +66,6 @@ export default function Login({ setUserLoggedIn }) {
     <div className="root">
       <h1>LOGIN PAGE</h1>
       <TextField
-        id="outlined-full-width"
         label="Username"
         style={{ padding: 8 }}
         placeholder="username"
@@ -83,7 +80,6 @@ export default function Login({ setUserLoggedIn }) {
         onChange={handleUsernameChange}
       />
       <TextField
-        id="outlined-full-width"
         label="Password"
         style={{ padding: 8 }}
         placeholder="Password"
