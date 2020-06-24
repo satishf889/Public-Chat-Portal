@@ -1,0 +1,16 @@
+.section {
+  margin: 1%;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  border: 2px solid;
+  column-gap: 1em;
+  height: 20em;
+  max-height: 100%;
+}
+
+.container {
+  height: 100%;
+  border: 1px solid;
+  /* overflow-y: scroll; */
+  overflow: hidden;
+}

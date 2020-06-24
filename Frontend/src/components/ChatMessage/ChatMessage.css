@@ -1,0 +1,43 @@
+.bot-message {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  border-radius: 1em;
+  padding-right: 0.2em;
+  padding-left: 0.2em;
+  /* width: 50%; */
+  border: 1px solid;
+  border-radius: 0.5em;
+  margin: 0.5%;
+  background-color: #ade9ad;
+  text-align: left;
+  max-width: 50%;
+  min-width: 20%;
+}
+
+.bot-message p {
+  border: 1px solid;
+  border-radius: 1em;
+  margin: 0.5em;
+  padding: 0.5em;
+  background-color: #90ee90;
+  text-align: left;
+}
+
+.chat-username {
+  padding-right: 1%;
+  padding-left: 1%;
+  padding-bottom: 1%;
+  text-align: left;
+  margin-bottom: 1%;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-style: oblique;
+  color: darkslateblue;
+}
+
+.message-time {
+  align-self: flex-end;
+  margin-top: 0.5em;
+  text-transform: uppercase;
+  color: darkslateblue;
+}

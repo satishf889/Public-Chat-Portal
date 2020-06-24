@@ -1,0 +1,24 @@
+.maincontainer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5em;
+}
+
+.usercount {
+  border-bottom: 2px solid;
+}
+
+.availableUsers {
+  font-size: 1em;
+  text-transform: capitalize;
+  font-style: oblique;
+  position: relative;
+}
+
+.userlist {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
