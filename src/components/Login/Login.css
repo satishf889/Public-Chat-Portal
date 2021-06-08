@@ -1,19 +1,31 @@
-.login-form {
-  padding: 10%;
+* {
+  font-family: Bradley Hand, cursive;
 }
 
-.root {
-  display: flex;
-  height: 100%;
-  width: 50%;
-  margin: 5%;
-  align-self: center;
-  flex-direction: column;
-  background-color: white;
+.form-label {
+  text-transform: uppercase;
+} 
+
+.page-header {
+  font-size: 3rem;
 }
 
-.user-error {
-  font-size: medium;
-  color: red;
-  text-transform: capitalize;
+.side-image {
+  height: 100vh;
+}
+
+.form-part{
+  height: 100vh;
+}
+
+@media only screen and (max-width:720px) {
+  .side-image{
+    height: auto;
+  }
+  .form-part {
+    height: fit-content;
+  }
+  .form.text {
+    font-size: 2px;
+  }
 }

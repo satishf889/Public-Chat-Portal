@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
-// import "./Login.css";
+import "./Login.css";
 import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
@@ -70,7 +70,7 @@ export default function Login({ setUserLoggedIn }) {
         <div className="col-md-6 col-sm-12">
           <div className="card">
             <img
-              className="card-img vh-100"
+              className="card-img side-image"
               src="https://www.free-mockup.com/wp-content/uploads/edd/2018/12/Vertical-Envelope-Free-Mockup-1000x750.jpg"
               alt="Card image"
             />
@@ -91,57 +91,72 @@ export default function Login({ setUserLoggedIn }) {
         </div>
 
         {/* Second Half */}
-        <div className="col-md-6 col-sm-12 vh-100">
+        <div className="col-md-6 col-sm-12">
           <div className="d-flex justify-content-center">
-            <h1 className="text-danger text-align-center float-right mt-3">
-              LOGIN PAGE
-            </h1>
+            <div className="text-align-center mt-3">
+              <p className='page-header'>LOGIN PAGE</p>
+            </div>
           </div>
 
-          <div className="d-flex align-items-center vh-100">
-            <form
-              className="p-2 w-100"
-              onSubmit={(e) => {
-                e.preventDefault();
-              }}
-            >
-              <div className="form-group">
-                <label for="exampleInputEmail1">Username</label>
-                <div className="col-md-8">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
-                  placeholder="Enter email"
-                  value={username}
-                  onChange={handleUsernameChange}
-                />
-                </div>
-                <small id="emailHelp" className="form-text text-muted .small">
-                  "Please reach out to satish.fulwani63@gmail.com"
-                </small>
-              </div>
-              <div className="form-group mt-4">
-                <label for="exampleInputPassword1">Password</label>
-                <div className="col-md-8">
+          <div className="d-flex form-part align-items-center">
+            <div className="row">
+              <div className="offset-md-6">
+                <form
+                  className="p-2"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                  }}
+                >
+                  <div className="form-group">
+                    <label className="form-label" for="exampleInputEmail1">
+                      Username
+                    </label>
+                    <div className="col-md-12">
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="exampleInputEmail1"
+                        aria-describedby="emailHelp"
+                        placeholder="Enter email"
+                        value={username}
+                        onChange={handleUsernameChange}
+                      />
+                    </div>
+                    <small
+                      id="emailHelp"
+                      className="form-text text-muted help-text"
+                    >
+                      "Please reach out to satish.fulwani63@gmail.com"
+                    </small>
+                  </div>
+                  <div className="form-group mt-4">
+                    <label className="form-label" for="exampleInputPassword1">
+                      Password
+                    </label>
+                    <div className="col-md-12">
+                      <input
+                        type="password"
+                        className="form-control"
+                        id="exampleInputPassword1"
+                        placeholder="Password"
+                      />
+                      <small id="emailHelp" className="form-text text-muted help-text" >
+                        "Please reach out to satish.fulwani63@gmail.com"
+                      </small>
+                    </div>
+                  </div>
 
-                <input
-                  type="password"
-                  className="form-control"
-                  id="exampleInputPassword1"
-                  placeholder="Password"
-                />
-                <small id="emailHelp" className="form-text text-muted">
-                  "Please reach out to satish.fulwani63@gmail.com"
-                </small>
-                </div>
+                  <div className="d-flex justify-content-end">
+                    <button
+                      onClick={handleLogin}
+                      className="btn btn-primary mt-4 pt-2"
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </form>
               </div>
-
-              <button onClick={handleLogin} className="btn btn-primary">
-                Submit
-              </button>
-            </form>
+            </div>
           </div>
         </div>
       </div>
